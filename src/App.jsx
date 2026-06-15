@@ -4,7 +4,7 @@ import Hero from "./sections/Hero/Hero";
 import Skills from "./sections/Skills/Skills";
 import Projects from "./sections/Projects/Projects";
 import Experience from "./sections/Experience/Experience";
-
+import Education from "./sections/Education/Education";
 function App() {
   return (
     <div className="relative bg-[var(--bg)] text-[var(--heading)] overflow-x-hidden">
@@ -21,7 +21,7 @@ function App() {
 
       <Experience />
 
-      
+      <Education />
     </div>
   );
 }
