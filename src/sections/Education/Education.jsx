@@ -1,24 +1,6 @@
 import { motion } from "framer-motion";
 import Container from "../../components/layout/Container";
-
-const education = [
-
-{
-
-degree:"Bachelor of Science in Engineering",
-
-field:"Computer Engineering",
-
-university:"University of Jaffna",
-
-period:"2022 - Present",
-
-description:
-"Final Year Computer Engineering Undergraduate with interests in Software Engineering, Artificial Intelligence, Cyber Security and Full Stack Development."
-
-},
-
-];
+import educationData from "../../data/educationData";
 
 function Education(){
 
@@ -28,7 +10,9 @@ return(
 
 id="education"
 
-className="py-28 relative overflow-hidden">
+className="py-28 relative overflow-hidden"
+
+>
 
 <Container>
 
@@ -78,7 +62,9 @@ className="
 text-5xl
 font-bold
 mt-3
-">
+"
+
+>
 
 Academic Journey
 
@@ -92,10 +78,13 @@ mx-auto
 mt-6
 leading-8
 text-[var(--text)]
-">
+"
 
-My educational background and academic journey that shaped my
-passion for software engineering and emerging technologies.
+>
+
+My educational background and academic journey
+that shaped my passion for software engineering
+and emerging technologies.
 
 </p>
 
@@ -110,14 +99,15 @@ top-0
 bottom-0
 w-[3px]
 bg-[var(--primary)]/30
-">
+"
 
-</div>
-{education.map((item,index)=>(
+></div>
+
+{educationData.map((item,index)=>(
 
 <motion.div
 
-key={index}
+key={item.id}
 
 initial={{
 
@@ -137,7 +127,9 @@ x:0
 
 transition={{
 
-duration:.6
+duration:.6,
+
+delay:index*.2
 
 }}
 
@@ -168,9 +160,9 @@ bg-[var(--primary)]
 border-4
 border-[var(--bg)]
 shadow-lg
-">
+"
 
-</div>
+></div>
 
 <div
 
@@ -263,8 +255,12 @@ mt-6
 "
 
 >
+{item.subjects.map((subject)=>(
 
 <span
+
+key={subject}
+
 className="
 px-4
 py-2
@@ -272,53 +268,15 @@ rounded-full
 bg-[var(--primary)]/10
 text-[var(--primary)]
 text-sm
-">
+"
 
-Computer Engineering
+>
 
-</span>
-
-<span
-className="
-px-4
-py-2
-rounded-full
-bg-[var(--primary)]/10
-text-[var(--primary)]
-text-sm
-">
-
-AI/ML
+{subject}
 
 </span>
 
-<span
-className="
-px-4
-py-2
-rounded-full
-bg-[var(--primary)]/10
-text-[var(--primary)]
-text-sm
-">
-
-Cyber Security
-
-</span>
-
-<span
-className="
-px-4
-py-2
-rounded-full
-bg-[var(--primary)]/10
-text-[var(--primary)]
-text-sm
-">
-
-Software Engineering
-
-</span>
+))}
 
 </div>
 
@@ -336,7 +294,7 @@ Software Engineering
 
 </section>
 
-);
+)
 
 }
 
