@@ -1,33 +1,33 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
 import Container from "./Container";
 
-const links = [
-  { title: "Home", id: "home" },
-  { title: "About", id: "about" },
-  { title: "Skills", id: "skills" },
-  { title: "Projects", id: "projects" },
-  { title: "Experience", id: "experience" },
-  { title: "Education", id: "education" },
-  { title: "Contact", id: "contact" },
+const navItems = [
+  { name: "Home", id: "home" },
+  { name: "About", id: "about" },
+  { name: "Skills", id: "skills" },
+  { name: "Projects", id: "projects" },
+  { name: "Experience", id: "experience" },
+  { name: "Education", id: "education" },
+  { name: "Contact", id: "contact" },
 ];
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("home");
   const [scroll, setScroll] = useState(false);
+  const [active, setActive] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setScroll(window.scrollY > 40);
+      setScroll(window.scrollY > 30);
 
-      links.forEach((item) => {
+      navItems.forEach((item) => {
         const section = document.getElementById(item.id);
 
         if (!section) return;
 
-        const top = section.offsetTop - 140;
+        const top = section.offsetTop - 120;
         const bottom = top + section.offsetHeight;
 
         if (window.scrollY >= top && window.scrollY < bottom) {
@@ -45,40 +45,42 @@ function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500
-      ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scroll
-          ? "backdrop-blur-xl bg-white/70 shadow-xl border-b border-white/40"
+          ? "backdrop-blur-2xl bg-white/70 shadow-lg border-b border-white/20"
           : "bg-transparent"
       }`}
     >
       <Container>
-        <div className="flex justify-between items-center h-20">
+
+        <div className="h-[88px] flex items-center justify-between">
 
           <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.96 }}
             href="#home"
-            className="text-3xl font-bold tracking-wide"
+            whileHover={{ scale: 1.05 }}
+            className="flex flex-col"
           >
-            <span className="text-[var(--primary)]">
+            <span className="text-3xl font-bold tracking-wide text-[var(--primary)]">
               Varnaja
             </span>
-            <span className="text-[var(--accent)]">.</span>
+
+            <span className="text-xs tracking-[4px] uppercase text-[var(--text)]">
+              Software Engineer
+            </span>
           </motion.a>
 
-          <ul className="hidden lg:flex gap-10">
+          <ul className="hidden lg:flex items-center gap-10">
 
-            {links.map((item) => (
+            {navItems.map((item) => (
 
               <li key={item.id}>
 
                 <a
                   href={`#${item.id}`}
-                  className={`relative pb-2 transition-all duration-300
+                  className={`relative pb-2 transition-all duration-300 font-medium
 
                   ${
                     active === item.id
@@ -89,12 +91,12 @@ function Navbar() {
                   hover:text-[var(--primary)]
                   `}
                 >
-                  {item.title}
+                  {item.name}
 
                   {active === item.id && (
                     <motion.div
                       layoutId="line"
-                      className="absolute left-0 bottom-0 h-[3px] w-full rounded-full bg-[var(--accent)]"
+                      className="absolute left-0 bottom-0 h-[3px] rounded-full w-full bg-gradient-to-r from-yellow-400 to-orange-400"
                     />
                   )}
 
@@ -108,24 +110,27 @@ function Navbar() {
 
           <motion.a
             whileHover={{
+              y: -2,
               scale: 1.05,
             }}
             whileTap={{
-              scale: 0.96,
+              scale: .95,
             }}
             href="#contact"
             className="
             hidden
             lg:flex
-            px-6
+            px-7
             py-3
             rounded-full
-            bg-[var(--primary)]
+            bg-gradient-to-r
+            from-[#8A5C37]
+            to-[#B98C65]
             text-white
-            shadow-lg
+            shadow-xl
             "
           >
-            Hire Me
+            Contact Me
           </motion.a>
 
           <button
@@ -136,6 +141,7 @@ function Navbar() {
           </button>
 
         </div>
+
       </Container>
 
       <AnimatePresence>
@@ -156,11 +162,11 @@ function Navbar() {
               y: -30,
             }}
             transition={{
-              duration: 0.3,
+              duration: .3,
             }}
             className="
             lg:hidden
-            backdrop-blur-xl
+            backdrop-blur-2xl
             bg-white/90
             border-t
             "
@@ -169,15 +175,15 @@ function Navbar() {
 
               <div className="py-8 flex flex-col gap-6">
 
-                {links.map((item) => (
+                {navItems.map((item) => (
 
                   <a
                     key={item.id}
                     href={`#${item.id}`}
                     onClick={() => setOpen(false)}
-                    className="text-lg text-[var(--heading)] hover:text-[var(--primary)]"
+                    className="text-lg font-medium hover:text-[var(--primary)]"
                   >
-                    {item.title}
+                    {item.name}
                   </a>
 
                 ))}
@@ -186,16 +192,16 @@ function Navbar() {
                   href="#contact"
                   onClick={() => setOpen(false)}
                   className="
-                  mt-3
                   w-fit
+                  mt-3
+                  px-6
+                  py-3
                   rounded-full
                   bg-[var(--primary)]
                   text-white
-                  px-6
-                  py-3
                   "
                 >
-                  Hire Me
+                  Contact Me
                 </a>
 
               </div>
