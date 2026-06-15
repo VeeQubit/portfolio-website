@@ -3,7 +3,7 @@ import About from "./sections/About/About";
 import Hero from "./sections/Hero/Hero";
 import Skills from "./sections/Skills/Skills";
 import Projects from "./sections/Projects/Projects";
-
+import Experience from "./sections/Experience/Experience";
 
 function App() {
   return (
@@ -18,6 +18,10 @@ function App() {
       <Skills />
 
       <Projects />
+
+      <Experience />
+
+      
     </div>
   );
 }
