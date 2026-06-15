@@ -1,27 +1,33 @@
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-
-import Logo from "../common/Logo";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
 import Container from "./Container";
-import ThemeToggle from "../common/ThemeToggle";
-import ResumeButton from "../common/ResumeButton";
-import navLinks from "../../data/navLinks";
+
+const links = [
+  { title: "Home", id: "home" },
+  { title: "About", id: "about" },
+  { title: "Skills", id: "skills" },
+  { title: "Projects", id: "projects" },
+  { title: "Experience", id: "experience" },
+  { title: "Education", id: "education" },
+  { title: "Contact", id: "contact" },
+];
 
 function Navbar() {
-  const [mobileMenu, setMobileMenu] = useState(false);
+  const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
+  const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScroll(window.scrollY > 40);
 
-      navLinks.forEach((item) => {
+      links.forEach((item) => {
         const section = document.getElementById(item.id);
 
         if (!section) return;
 
-        const top = section.offsetTop - 120;
+        const top = section.offsetTop - 140;
         const bottom = top + section.offsetHeight;
 
         if (window.scrollY >= top && window.scrollY < bottom) {
@@ -32,161 +38,176 @@ function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
 
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header
-      className={`
-      fixed
-      top-4
-      left-1/2
-      -translate-x-1/2
-      w-[95%]
-      max-w-7xl
-      z-50
-      transition-all
-      duration-500
-      rounded-full
-      border
-      border-white/20
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500
       ${
-        scrolled
-          ? "bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl shadow-xl"
-          : "bg-white/40 dark:bg-neutral-900/40 backdrop-blur-lg"
-      }
-      `}
+        scroll
+          ? "backdrop-blur-xl bg-white/70 shadow-xl border-b border-white/40"
+          : "bg-transparent"
+      }`}
     >
       <Container>
-        <nav className="flex h-20 items-center justify-between px-8">
+        <div className="flex justify-between items-center h-20">
 
-          <Logo />
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
+            href="#home"
+            className="text-3xl font-bold tracking-wide"
+          >
+            <span className="text-[var(--primary)]">
+              Varnaja
+            </span>
+            <span className="text-[var(--accent)]">.</span>
+          </motion.a>
 
-          {/* Desktop */}
+          <ul className="hidden lg:flex gap-10">
 
-          <ul className="hidden lg:flex items-center gap-10">
+            {links.map((item) => (
 
-            {navLinks.map((link) => (
-              <li key={link.id}>
+              <li key={item.id}>
+
                 <a
-                  href={`#${link.id}`}
-                  className={`
-                  relative
-                  text-[15px]
-                  font-medium
-                  transition-all
-                  duration-300
-                  hover:text-pink-500
-                  hover:scale-105
+                  href={`#${item.id}`}
+                  className={`relative pb-2 transition-all duration-300
+
                   ${
-                    active === link.id
-                      ? "text-pink-500"
-                      : ""
+                    active === item.id
+                      ? "text-[var(--primary)]"
+                      : "text-[var(--heading)]"
                   }
+
+                  hover:text-[var(--primary)]
                   `}
                 >
-                  {link.title}
+                  {item.title}
 
-                  <span
-                    className={`
-                    absolute
-                    left-0
-                    -bottom-1
-                    h-[2px]
-                    rounded-full
-                    bg-pink-400
-                    transition-all
-                    duration-300
-                    ${
-                      active === link.id
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
-                    }
-                    `}
-                  />
+                  {active === item.id && (
+                    <motion.div
+                      layoutId="line"
+                      className="absolute left-0 bottom-0 h-[3px] w-full rounded-full bg-[var(--accent)]"
+                    />
+                  )}
+
                 </a>
+
               </li>
+
             ))}
 
           </ul>
 
-          {/* Right */}
-
-          <div className="hidden lg:flex items-center gap-4">
-
-            <ThemeToggle />
-
-            <ResumeButton />
-
-          </div>
-
-          {/* Mobile Button */}
+          <motion.a
+            whileHover={{
+              scale: 1.05,
+            }}
+            whileTap={{
+              scale: 0.96,
+            }}
+            href="#contact"
+            className="
+            hidden
+            lg:flex
+            px-6
+            py-3
+            rounded-full
+            bg-[var(--primary)]
+            text-white
+            shadow-lg
+            "
+          >
+            Hire Me
+          </motion.a>
 
           <button
-            className="lg:hidden"
-            onClick={() => setMobileMenu(!mobileMenu)}
+            onClick={() => setOpen(!open)}
+            className="lg:hidden text-3xl text-[var(--primary)]"
           >
-            {mobileMenu ? <X size={30} /> : <Menu size={30} />}
+            {open ? <HiOutlineX /> : <HiOutlineMenuAlt3 />}
           </button>
 
-        </nav>
+        </div>
       </Container>
 
-      {/* Mobile Menu */}
+      <AnimatePresence>
 
-      <div
-        className={`
-        lg:hidden
-        overflow-hidden
-        transition-all
-        duration-500
-        ${
-          mobileMenu
-            ? "max-h-[500px] opacity-100"
-            : "max-h-0 opacity-0"
-        }
-        `}
-      >
-        <div className="rounded-b-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl shadow-xl">
+        {open && (
 
-          <ul className="flex flex-col py-6">
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -30,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              y: -30,
+            }}
+            transition={{
+              duration: 0.3,
+            }}
+            className="
+            lg:hidden
+            backdrop-blur-xl
+            bg-white/90
+            border-t
+            "
+          >
+            <Container>
 
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={() => setMobileMenu(false)}
-                className={`
-                py-3
-                transition-all
-                duration-300
-                hover:text-pink-500
-                ${
-                  active === link.id
-                    ? "text-pink-500 font-semibold"
-                    : ""
-                }
-                `}
-              >
-                {link.title}
-              </a>
-            ))}
+              <div className="py-8 flex flex-col gap-6">
 
-            <div className="flex justify-center gap-4 mt-5">
+                {links.map((item) => (
 
-              <ThemeToggle />
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    onClick={() => setOpen(false)}
+                    className="text-lg text-[var(--heading)] hover:text-[var(--primary)]"
+                  >
+                    {item.title}
+                  </a>
 
-              <ResumeButton />
+                ))}
 
-            </div>
+                <a
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  className="
+                  mt-3
+                  w-fit
+                  rounded-full
+                  bg-[var(--primary)]
+                  text-white
+                  px-6
+                  py-3
+                  "
+                >
+                  Hire Me
+                </a>
 
-          </ul>
+              </div>
 
-        </div>
+            </Container>
+          </motion.div>
 
-      </div>
+        )}
 
-    </header>
+      </AnimatePresence>
+
+    </motion.nav>
   );
 }
 
