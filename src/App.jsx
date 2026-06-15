@@ -5,6 +5,7 @@ import Skills from "./sections/Skills/Skills";
 import Projects from "./sections/Projects/Projects";
 import Experience from "./sections/Experience/Experience";
 import Education from "./sections/Education/Education";
+import Contact from "./sections/Contact/Contact";
 function App() {
   return (
     <div className="relative bg-[var(--bg)] text-[var(--heading)] overflow-x-hidden">
@@ -22,6 +23,8 @@ function App() {
       <Experience />
 
       <Education />
+
+      <Contact />
     </div>
   );
 }
