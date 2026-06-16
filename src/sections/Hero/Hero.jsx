@@ -1,361 +1,393 @@
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+
 import Container from "../../components/layout/Container";
 import heroData from "../../data/heroData";
 
 function Hero() {
-  return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center overflow-hidden pt-24"
-    >
-      {/* Background Blur */}
 
-      <motion.div
-        animate={{
-          x: [0, 80, 0],
-          y: [0, -60, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 12,
-        }}
+  return (
+
+    <section
+
+      id="home"
+
+      className="
+      relative
+      min-h-screen
+      flex
+      items-center
+      overflow-hidden
+      pt-28
+      "
+
+    >
+
+      {/* Background Glow */}
+
+      <div
+
         className="
+        hero-glow
         absolute
-        -left-32
-        -top-32
-        w-[520px]
-        h-[520px]
-        rounded-full
-        bg-yellow-200/20
-        blur-[150px]
+        top-[-120px]
+        left-[-120px]
         "
+
       />
 
-      <motion.div
-        animate={{
-          x: [0, -60, 0],
-          y: [0, 60, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 15,
-        }}
+      <div
+
         className="
+        hero-glow
         absolute
-        -right-32
-        -bottom-32
-        w-[500px]
-        h-[500px]
-        rounded-full
-        bg-orange-200/20
-        blur-[150px]
+        bottom-[-120px]
+        right-[-120px]
         "
+
       />
 
       <Container>
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+
+        <div
+
+          className="
+          grid
+          lg:grid-cols-[1.25fr_.75fr]
+          gap-16
+          items-center
+          "
+
+        >
 
           {/* LEFT */}
 
           <motion.div
+
             initial={{
               opacity: 0,
-              x: -60,
+              x: -40
             }}
+
             animate={{
               opacity: 1,
-              x: 0,
+              x: 0
             }}
+
             transition={{
-              duration: 0.8,
+              duration: .8
             }}
-            className="relative z-10"
+
           >
 
             <p
+
               className="
-              text-xl
-              font-medium
-              text-[var(--primary)]
-              mb-4
+              section-subtitle
               "
+
             >
+
               {heroData.greeting}
+
             </p>
 
             <h1
+
               className="
-              text-5xl
-              sm:text-6xl
-              lg:text-7xl
-              xl:text-8xl
-              font-bold
-              leading-tight
+              elegant-title
+              mt-4
+              max-w-[640px]
               "
+
             >
+
               {heroData.firstName}
 
               <br />
 
               {heroData.lastName}
+
             </h1>
 
             <div
+
               className="
-              mt-6
-              text-xl
-              sm:text-2xl
-              font-medium
-              text-[var(--text)]
+              mt-5
+              text-2xl
+              font-semibold
+              text-[var(--secondary)]
               "
+
             >
+
               <TypeAnimation
+
                 sequence={[
+
                   heroData.roles[0],
-                  2000,
+
+                  1800,
 
                   heroData.roles[1],
-                  2000,
+
+                  1800,
 
                   heroData.roles[2],
-                  2000,
+
+                  1800,
 
                   heroData.roles[3],
-                  2000,
+
+                  1800,
+
                 ]}
+
                 repeat={Infinity}
-                speed={40}
+
+                speed={45}
+
               />
+
             </div>
+
+            <div
+
+              className="
+              gold-divider
+              mx-0
+              mt-6
+              mb-6
+              "
+
+            />
 
             <p
-              className="
-              mt-8
-              text-lg
-              leading-9
-              max-w-2xl
-              text-[var(--text)]
-              "
-            >
-              {heroData.description}
-            </p>
 
-            <div
+              className="
+              elegant-text
+              max-w-[570px]
+              "
+
+            >
+
+              {heroData.description}
+
+            </p>
+            </motion.div>
+            {/* RIGHT SIDE */}
+
+            <motion.div
+
+              initial={{
+                opacity: 0,
+                x: 40
+              }}
+
+              animate={{
+                opacity: 1,
+                x: 0
+              }}
+
+              transition={{
+                duration: .8
+              }}
+
               className="
               flex
-              flex-wrap
-              gap-5
-              mt-10
+              flex-col
+              items-center
+              justify-center
               "
+
             >
 
-              <motion.a
-                whileHover={{
-                  y: -4,
-                  scale: 1.04,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
-                href={heroData.buttons[0].href}
+              {/* Profile Image */}
+
+              <div
+
                 className="
-                px-8
-                py-4
-                rounded-full
-                bg-[var(--primary)]
-                text-white
-                shadow-xl
-                font-medium
+                image-frame
+                shadow-premium
                 "
+
               >
-                {heroData.buttons[0].text}
-              </motion.a>
 
-              <motion.a
-                whileHover={{
-                  y: -4,
-                  scale: 1.04,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
-                href={heroData.buttons[1].href}
-                className="
-                px-8
-                py-4
-                rounded-full
-                border
-                border-[var(--primary)]
-                hover:bg-[var(--primary)]
-                hover:text-white
-                duration-300
-                font-medium
-                "
-              >
-                {heroData.buttons[1].text}
-              </motion.a>
-
-            </div>
-
-            {/* Stats */}
-
-            <div
-              className="
-              grid
-              grid-cols-3
-              gap-5
-              mt-14
-              max-w-xl
-              "
-            >
-              {heroData.stats.map((item) => (
                 <div
-                  key={item.label}
-                  className="glass rounded-3xl p-5 text-center"
+
+                  className="
+                  image-hover
+                  overflow-hidden
+                  rounded-[30px]
+                  "
+
                 >
-                  <h2 className="text-3xl font-bold text-[var(--primary)]">
-                    {item.value}
-                  </h2>
 
-                  <p className="mt-2 text-sm text-[var(--text)]">
-                    {item.label}
-                  </p>
+                  <img
+
+                    src={heroData.profileImage}
+
+                    alt={heroData.profileAlt}
+
+                    loading="lazy"
+
+                    className="
+                    w-full
+                    max-w-[220px]
+                    lg:max-w-[250px]
+                    object-cover
+                    rounded-[24px]
+                    "
+
+                  />
+
                 </div>
-              ))}
-            </div>
 
-          </motion.div>
-                    {/* RIGHT SIDE */}
+              </div>
 
-          <motion.div
-            initial={{
-              opacity: 0,
-              scale: 0.8,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              y: [0, -18, 0],
-            }}
-            transition={{
-              duration: 0.8,
-              y: {
-                repeat: Infinity,
-                duration: 5,
-              },
-            }}
-            className="
-            relative
-            z-10
-            flex
-            justify-center
-            "
-          >
-            <div
-              className="
-              relative
-              glass
-              rounded-[40px]
-              p-5
-              shadow-2xl
-              hover:scale-[1.02]
-              transition-all
-              duration-500
-              "
-            >
+              {/* Buttons Under Photo */}
 
-              <img
-                src={heroData.profileImage}
-                alt={heroData.profileAlt}
-                loading="lazy"
+              <div
+
                 className="
+                flex
+                flex-col
+                gap-4
+                mt-8
                 w-full
-                max-w-[430px]
-                rounded-[30px]
-                object-cover
-                shadow-2xl
-                hover:scale-[1.02]
-                transition-all
-                duration-500
+                max-w-[230px]
                 "
-              />
 
-              <div
-                className="
-                absolute
-                top-[-20px]
-                right-[-20px]
-                w-16
-                h-16
-                rounded-full
-                bg-yellow-300/50
-                blur-xl
-                "
-              />
-
-              <div
-                className="
-                absolute
-                bottom-[-20px]
-                left-[-20px]
-                w-14
-                h-14
-                rounded-full
-                bg-orange-300/50
-                blur-xl
-                "
-              />
-
-              <div
-                className="
-                absolute
-                top-10
-                left-[-25px]
-                glass
-                rounded-full
-                px-4
-                py-2
-                text-sm
-                font-medium
-                "
               >
-                {heroData.badges[0]}
+
+                <motion.a
+
+                  whileHover={{
+                    y: -2,
+                    scale: 1.02
+                  }}
+
+                  whileTap={{
+                    scale: .96
+                  }}
+
+                  href={heroData.buttons[0].href}
+
+                  className="btn-primary justify-center"
+
+                >
+
+                  {heroData.buttons[0].text}
+
+                </motion.a>
+
+                <motion.a
+
+                  whileHover={{
+                    y: -2,
+                    scale: 1.02
+                  }}
+
+                  whileTap={{
+                    scale: .96
+                  }}
+
+                  href={heroData.buttons[1].href}
+
+                  className="btn-outline justify-center"
+
+                >
+
+                  {heroData.buttons[1].text}
+
+                </motion.a>
+
               </div>
 
+              {/* Statistics */}
+
               <div
+
                 className="
-                absolute
-                bottom-10
-                right-[-25px]
-                glass
-                rounded-full
-                px-4
-                py-2
-                text-sm
-                font-medium
+                grid
+                grid-cols-3
+                gap-3
+                mt-8
+                w-full
+                max-w-[330px]
                 "
+
               >
-                {heroData.badges[1]}
+
+                {heroData.stats.map((item) => (
+
+                  <div
+
+                    key={item.label}
+
+                    className="
+                    paper-card
+                    hover-card
+                    text-center
+                    py-4
+                    px-2
+                    "
+
+                  >
+
+                    <h3
+
+                      className="
+                      text-xl
+                      font-bold
+                      text-[var(--primary)]
+                      "
+
+                    >
+
+                      {item.value}
+
+                    </h3>
+
+                    <p
+
+                      className="
+                      text-[11px]
+                      mt-1
+                      leading-4
+                      "
+
+                    >
+
+                      {item.label}
+
+                    </p>
+
+                  </div>
+
+                ))}
+
               </div>
 
-            </div>
+            </motion.div>
 
-          </motion.div>
+          
 
         </div>
+        {/* Scroll Indicator */}
 
-      </Container>
+        <motion.div
 
-      <motion.div
-        animate={{
-          y: [0, 12, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 2,
-        }}
-        className="
+          animate={{
+            y: [0, 10, 0]
+          }}
+
+          transition={{
+            repeat: Infinity,
+            duration: 2
+          }}
+
+          className="
         absolute
         bottom-8
         left-1/2
@@ -363,35 +395,120 @@ function Hero() {
         flex
         flex-col
         items-center
+        z-20
         "
-      >
 
-        <span
-          className="
-          text-xs
-          tracking-[3px]
+        >
+
+          <span
+
+            className="
+          text-[11px]
           uppercase
-          text-[var(--text)]
+          tracking-[5px]
+          text-[var(--secondary)]
           mb-2
           "
-        >
-          Scroll
-        </span>
 
-        <a
-          href="#about"
-          className="
-          text-4xl
+          >
+
+            Scroll
+
+          </span>
+
+          <motion.a
+
+            whileHover={{
+              scale: 1.1
+            }}
+
+            href="#about"
+
+            className="
+          w-11
+          h-11
+          rounded-full
+          glass
+          flex
+          items-center
+          justify-center
           text-[var(--primary)]
+          text-xl
+          shadow-lg
           "
+
+          >
+
+            ↓
+
+          </motion.a>
+
+        </motion.div>
+
+        {/* Decorative Glow */}
+
+        <div
+
+          className="
+        absolute
+        left-[8%]
+        bottom-[8%]
+        w-44
+        h-44
+        rounded-full
+        bg-[var(--leaf)]
+        opacity-10
+        blur-[120px]
+        pointer-events-none
+        "
+
+        />
+
+        <div
+
+          className="
+        absolute
+        right-[8%]
+        top-[15%]
+        w-52
+        h-52
+        rounded-full
+        bg-[var(--gold)]
+        opacity-10
+        blur-[130px]
+        pointer-events-none
+        "
+
+        />
+
+        {/* Bottom Divider */}
+
+        <div
+
+          className="
+        absolute
+        bottom-0
+        left-0
+        w-full
+        flex
+        justify-center
+        "
+
         >
-          ↓
-        </a>
 
-      </motion.div>
+          <div
 
-    </section>
-  );
+            className="
+          botanical-divider
+          "
+
+          />
+
+        </div>
+      </Container>
+      </section>
+      );
+
 }
 
-export default Hero;
+      export default Hero;

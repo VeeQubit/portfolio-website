@@ -1,30 +1,47 @@
 @import "tailwindcss";
 
-/* ==========================
-   CSS VARIABLES
-========================== */
+/* =========================================
+        BOTANICAL DESIGN SYSTEM
+========================================= */
 
 :root{
 
---bg:#F8F4EE;
+--bg:#F8F5EF;
 
---card:#FFFDF8;
+--card:#FFFCF7;
 
---primary:#8A5C37;
+--paper:#FDF9F2;
 
---secondary:#B98C65;
+--primary:#8B5E3C;
 
---accent:#D8B46C;
+--secondary:#B88A62;
 
---heading:#2C2622;
+--accent:#D8B46A;
 
---text:#72685F;
+--gold:#D4AF37;
+
+--leaf:#6F8B63;
+
+--heading:#2D2825;
+
+--text:#6C625A;
+
+--border:rgba(212,180,106,.18);
+
+--glass:rgba(255,255,255,.55);
+
+--shadow:
+0 10px 30px rgba(0,0,0,.08);
+
+--shadow-lg:
+0 20px 60px rgba(0,0,0,.12);
 
 }
 
-/* ==========================
+
+/* =========================================
 RESET
-========================== */
+========================================= */
 
 *{
 
@@ -40,11 +57,13 @@ html{
 
 scroll-behavior:smooth;
 
+overflow-x:hidden;
+
 }
 
 body{
 
-font-family:'Poppins',sans-serif;
+font-family:"Poppins",sans-serif;
 
 background:var(--bg);
 
@@ -52,23 +71,119 @@ color:var(--heading);
 
 overflow-x:hidden;
 
-background-image:
-
-radial-gradient(circle at 20% 20%,rgba(255,220,150,.08),transparent 30%),
-
-radial-gradient(circle at 80% 80%,rgba(180,120,70,.08),transparent 30%);
+position:relative;
 
 }
 
-/* ==========================
+
+/* =========================================
+BACKGROUND
+========================================= */
+
+body{
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#FCFAF6,
+
+#F8F5EF
+
+);
+
+background-attachment:fixed;
+
+}
+
+
+/* Paper Texture */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+opacity:.03;
+
+background-image:
+
+linear-gradient(
+
+45deg,
+
+transparent 48%,
+
+rgba(0,0,0,.08) 50%,
+
+transparent 52%
+
+);
+
+background-size:350px;
+
+z-index:-3;
+
+}
+
+
+/* Botanical Glow */
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+
+circle at 20% 15%,
+
+rgba(212,180,106,.08),
+
+transparent 35%
+
+),
+
+radial-gradient(
+
+circle at 80% 75%,
+
+rgba(111,139,99,.08),
+
+transparent 35%
+
+);
+
+z-index:-2;
+
+}
+
+
+/* =========================================
 COMMON
-========================== */
+========================================= */
 
 img{
 
 display:block;
 
 max-width:100%;
+
+transition:.5s;
 
 }
 
@@ -84,21 +199,85 @@ section{
 
 position:relative;
 
-padding:120px 0;
+padding:130px 0;
+
+overflow:hidden;
 
 }
 
-::selection{
 
-background:var(--primary);
+/* =========================================
+TYPOGRAPHY
+========================================= */
 
-color:white;
+h1{
+
+font-size:clamp(3rem,7vw,5.3rem);
+
+font-weight:800;
+
+line-height:1.05;
+
+letter-spacing:-3px;
+
+color:var(--heading);
 
 }
 
-/* ==========================
+h2{
+
+font-size:clamp(2rem,4vw,3.4rem);
+
+font-weight:700;
+
+line-height:1.15;
+
+letter-spacing:-1px;
+
+}
+
+h3{
+
+font-weight:600;
+
+}
+
+p{
+
+line-height:1.9;
+
+color:var(--text);
+
+}
+
+
+.section-subtitle{
+
+font-size:.9rem;
+
+text-transform:uppercase;
+
+letter-spacing:4px;
+
+color:var(--primary);
+
+}
+
+
+.section-title{
+
+max-width:700px;
+
+margin:auto;
+
+text-align:center;
+
+}
+
+
+/* =========================================
 SCROLLBAR
-========================== */
+========================================= */
 
 ::-webkit-scrollbar{
 
@@ -110,27 +289,552 @@ width:8px;
 
 background:var(--primary);
 
-border-radius:20px;
+border-radius:30px;
 
 }
 
 ::-webkit-scrollbar-track{
 
-background:#efefef;
+background:#EFE8DD;
 
 }
 
-/* ==========================
-NAVBAR
-========================== */
+
+/* =========================================
+SELECTION
+========================================= */
+
+::selection{
+
+background:var(--primary);
+
+color:white;
+
+}
+
+
+/* =========================================
+CONTAINER
+========================================= */
+
+.container{
+
+width:100%;
+
+max-width:1320px;
+
+margin:auto;
+
+padding-inline:32px;
+
+}
+/* =========================================
+        PREMIUM GLASS
+========================================= */
+
+.glass{
+
+background:
+rgba(255,255,255,.58);
+
+backdrop-filter:
+blur(18px);
+
+-webkit-backdrop-filter:
+blur(18px);
+
+border:
+1px solid rgba(255,255,255,.45);
+
+box-shadow:
+0 15px 40px rgba(0,0,0,.08);
+
+transition:
+all .35s ease;
+
+}
+
+.glass:hover{
+
+transform:
+translateY(-6px);
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.12);
+
+}
+
+
+/* =========================================
+        PAPER CARD
+========================================= */
+
+.paper-card{
+
+background:
+
+linear-gradient(
+
+180deg,
+
+rgba(255,255,255,.65),
+
+rgba(255,255,255,.35)
+
+);
+
+border:
+
+1px solid var(--border);
+
+border-radius:30px;
+
+backdrop-filter:
+
+blur(10px);
+
+-webkit-backdrop-filter:
+
+blur(10px);
+
+box-shadow:
+
+var(--shadow);
+
+padding:28px;
+
+transition:.35s;
+
+}
+
+.paper-card:hover{
+
+transform:
+
+translateY(-8px);
+
+box-shadow:
+
+var(--shadow-lg);
+
+}
+
+
+/* =========================================
+        LUXURY CARD
+========================================= */
+
+.luxury-card{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:28px;
+
+padding:28px;
+
+box-shadow:var(--shadow);
+
+transition:.35s;
+
+}
+
+.luxury-card:hover{
+
+transform:
+
+translateY(-8px);
+
+box-shadow:var(--shadow-lg);
+
+}
+
+
+/* =========================================
+        BUTTONS
+========================================= */
+
+.btn-primary{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:15px 34px;
+
+border-radius:18px;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+var(--primary),
+
+var(--secondary)
+
+);
+
+color:white;
+
+font-weight:500;
+
+box-shadow:
+
+0 12px 30px rgba(139,94,60,.22);
+
+transition:.35s;
+
+}
+
+.btn-primary:hover{
+
+transform:
+
+translateY(-4px);
+
+box-shadow:
+
+0 20px 45px rgba(139,94,60,.28);
+
+}
+
+
+.btn-outline{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:15px 34px;
+
+border-radius:18px;
+
+border:1px solid var(--primary);
+
+background:white;
+
+color:var(--primary);
+
+font-weight:500;
+
+transition:.35s;
+
+}
+
+.btn-outline:hover{
+
+background:var(--primary);
+
+color:white;
+
+transform:
+
+translateY(-4px);
+
+}
+
+
+/* =========================================
+        IMAGE FRAME
+========================================= */
+
+.image-frame{
+
+padding:10px;
+
+border-radius:36px;
+
+background:
+
+rgba(255,255,255,.5);
+
+border:
+
+1px solid rgba(212,180,106,.25);
+
+box-shadow:
+
+var(--shadow);
+
+}
+
+
+.image-frame img{
+
+border-radius:28px;
+
+transition:.5s;
+
+}
+
+
+.image-frame:hover img{
+
+transform:
+
+scale(1.03);
+
+}
+
+
+/* =========================================
+        HOVER CARD
+========================================= */
+
+.hover-card{
+
+transition:
+
+all .35s ease;
+
+}
+
+.hover-card:hover{
+
+transform:
+
+translateY(-10px);
+
+box-shadow:
+
+0 25px 55px rgba(0,0,0,.10);
+
+}
+
+
+/* =========================================
+        GOLD DIVIDER
+========================================= */
+
+.gold-divider{
+
+width:140px;
+
+height:2px;
+
+margin:28px auto;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+var(--gold),
+
+transparent
+
+);
+
+}
+
+
+/* =========================================
+        BOTANICAL DIVIDER
+========================================= */
+
+.botanical-divider{
+
+width:220px;
+
+height:26px;
+
+margin:auto;
+
+position:relative;
+
+}
+
+.botanical-divider::before{
+
+content:"";
+
+position:absolute;
+
+top:50%;
+
+left:0;
+
+width:100%;
+
+height:1px;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(212,180,106,.5),
+
+transparent
+
+);
+
+}
+
+.botanical-divider::after{
+
+content:"❦";
+
+position:absolute;
+
+left:50%;
+
+top:50%;
+
+transform:
+
+translate(-50%,-50%);
+
+background:var(--bg);
+
+padding:0 12px;
+
+font-size:18px;
+
+color:var(--gold);
+
+}
+
+
+/* =========================================
+        PREMIUM SHADOW
+========================================= */
+
+.shadow-premium{
+
+box-shadow:
+
+0 20px 50px rgba(0,0,0,.08);
+
+}
+/* =========================================
+        BOTANICAL CORNERS
+========================================= */
+
+.corner-top{
+
+position:absolute;
+
+top:25px;
+
+left:25px;
+
+width:85px;
+
+height:85px;
+
+border-top:2px solid rgba(212,180,106,.22);
+
+border-left:2px solid rgba(212,180,106,.22);
+
+pointer-events:none;
+
+z-index:1;
+
+}
+
+.corner-bottom{
+
+position:absolute;
+
+right:25px;
+
+bottom:25px;
+
+width:85px;
+
+height:85px;
+
+border-right:2px solid rgba(212,180,106,.22);
+
+border-bottom:2px solid rgba(212,180,106,.22);
+
+pointer-events:none;
+
+z-index:1;
+
+}
+
+
+/* =========================================
+        BOTANICAL FRAME
+========================================= */
+
+.botanical-frame{
+
+position:relative;
+
+}
+
+.botanical-frame::before{
+
+content:"";
+
+position:absolute;
+
+top:-14px;
+
+left:-14px;
+
+width:70px;
+
+height:70px;
+
+border-top:2px solid rgba(212,180,106,.18);
+
+border-left:2px solid rgba(212,180,106,.18);
+
+}
+
+.botanical-frame::after{
+
+content:"";
+
+position:absolute;
+
+right:-14px;
+
+bottom:-14px;
+
+width:70px;
+
+height:70px;
+
+border-right:2px solid rgba(212,180,106,.18);
+
+border-bottom:2px solid rgba(212,180,106,.18);
+
+}
+
+
+/* =========================================
+        NAVBAR
+========================================= */
 
 nav{
 
 transition:.4s;
 
+backdrop-filter:blur(14px);
+
+-webkit-backdrop-filter:blur(14px);
+
 }
 
-nav::before{
+nav::after{
 
 content:"";
 
@@ -152,7 +856,7 @@ linear-gradient(
 
 transparent,
 
-rgba(212,175,55,.35),
+rgba(212,180,106,.4),
 
 transparent
 
@@ -168,104 +872,161 @@ transition:.3s;
 
 nav a:hover{
 
-transform:translateY(-2px);
+color:var(--primary);
 
 }
 
-/* ==========================
-GLASS EFFECT
-========================== */
 
-.glass{
+/* =========================================
+        PREMIUM LINK
+========================================= */
 
-backdrop-filter:blur(20px);
+.link-premium{
 
--webkit-backdrop-filter:blur(20px);
+position:relative;
 
-background:rgba(255,255,255,.45);
-
-border:1px solid rgba(255,255,255,.25);
-
-box-shadow:
-
-0 10px 30px rgba(0,0,0,.08);
+display:inline-block;
 
 }
 
-/* ==========================
-BUTTONS
-========================== */
+.link-premium::after{
 
-button{
+content:"";
 
-cursor:pointer;
+position:absolute;
+
+left:0;
+
+bottom:-5px;
+
+width:0;
+
+height:2px;
+
+background:var(--gold);
 
 transition:.3s;
 
 }
 
-button:hover{
+.link-premium:hover::after{
 
-transform:translateY(-2px);
-
-}
-
-/* ==========================
-SMOOTH IMAGE
-========================== */
-
-img{
-
-transition:.5s;
+width:100%;
 
 }
 
-/* ==========================
-HOVER CARD
-========================== */
 
-.hover-card{
+/* =========================================
+        HERO GLOW
+========================================= */
 
-transition:.4s;
+.hero-glow{
 
-}
+position:absolute;
 
-.hover-card:hover{
+width:320px;
 
-transform:translateY(-8px);
+height:320px;
 
-}
-/* ===============================
-BOTANICAL THEME
-=============================== */
+border-radius:50%;
 
-body::before{
+background:
 
-content:"";
+rgba(212,180,106,.08);
 
-position:fixed;
+filter:
 
-inset:0;
+blur(170px);
 
 pointer-events:none;
 
-opacity:.035;
+}
 
-background-image:
 
-radial-gradient(circle at 20% 20%,rgba(212,180,108,.2),transparent 20%),
+/* =========================================
+        GOLD GLOW
+========================================= */
 
-radial-gradient(circle at 80% 70%,rgba(138,92,55,.15),transparent 25%);
+.gold-glow{
 
-z-index:-2;
+position:absolute;
+
+width:220px;
+
+height:220px;
+
+border-radius:50%;
+
+background:
+
+rgba(212,180,106,.08);
+
+filter:
+
+blur(110px);
+
+pointer-events:none;
 
 }
 
-section{
 
-position:relative;
+/* =========================================
+        SOFT GLOW
+========================================= */
+
+.soft-glow{
+
+position:absolute;
+
+width:180px;
+
+height:180px;
+
+border-radius:50%;
+
+background:
+
+rgba(111,139,99,.08);
+
+filter:
+
+blur(100px);
+
+pointer-events:none;
 
 }
+
+
+/* =========================================
+        GOLD LINE
+========================================= */
+
+.gold-line{
+
+width:100%;
+
+height:1px;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(212,180,106,.55),
+
+transparent
+
+);
+
+}
+
+
+/* =========================================
+        SECTION DECORATION
+========================================= */
 
 section::before{
 
@@ -273,62 +1034,758 @@ content:"";
 
 position:absolute;
 
-left:40px;
+top:0;
 
-top:40px;
+left:50%;
 
-width:100px;
+transform:translateX(-50%);
 
-height:100px;
+width:180px;
 
-border-left:2px solid rgba(185,140,101,.15);
+height:1px;
 
-border-top:2px solid rgba(185,140,101,.15);
+background:
 
-pointer-events:none;
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(212,180,106,.35),
+
+transparent
+
+);
+
+}
+/* =========================================
+        FLOATING ANIMATIONS
+========================================= */
+
+@keyframes floatSlow{
+
+0%{
+
+transform:
+translateY(0px);
 
 }
 
-section::after{
+50%{
+
+transform:
+translateY(-15px);
+
+}
+
+100%{
+
+transform:
+translateY(0px);
+
+}
+
+}
+
+.float{
+
+animation:
+
+floatSlow
+
+5s
+
+ease-in-out
+
+infinite;
+
+}
+
+
+/* =========================================
+        FLOATING LEAF
+========================================= */
+
+@keyframes leafFloat{
+
+0%{
+
+transform:
+
+translateY(0px)
+
+rotate(0deg);
+
+}
+
+25%{
+
+transform:
+
+translateY(-12px)
+
+rotate(4deg);
+
+}
+
+50%{
+
+transform:
+
+translateY(4px)
+
+rotate(-4deg);
+
+}
+
+75%{
+
+transform:
+
+translateY(-10px)
+
+rotate(3deg);
+
+}
+
+100%{
+
+transform:
+
+translateY(0px)
+
+rotate(0deg);
+
+}
+
+}
+
+.leaf{
+
+position:absolute;
+
+pointer-events:none;
+
+opacity:.12;
+
+animation:
+
+leafFloat
+
+12s
+
+ease-in-out
+
+infinite;
+
+}
+
+
+/* =========================================
+        ROTATE SLOW
+========================================= */
+
+@keyframes rotateSlow{
+
+0%{
+
+transform:
+
+rotate(0deg);
+
+}
+
+100%{
+
+transform:
+
+rotate(360deg);
+
+}
+
+}
+
+.rotate-slow{
+
+animation:
+
+rotateSlow
+
+40s
+
+linear
+
+infinite;
+
+}
+
+
+/* =========================================
+        FADE UP
+========================================= */
+
+.fade-up{
+
+opacity:0;
+
+transform:
+
+translateY(50px);
+
+transition:
+
+all .8s ease;
+
+}
+
+.fade-visible{
+
+opacity:1;
+
+transform:
+
+translateY(0);
+
+}
+
+
+/* =========================================
+        FADE LEFT
+========================================= */
+
+.fade-left{
+
+opacity:0;
+
+transform:
+
+translateX(-40px);
+
+transition:
+
+all .8s ease;
+
+}
+
+
+/* =========================================
+        FADE RIGHT
+========================================= */
+
+.fade-right{
+
+opacity:0;
+
+transform:
+
+translateX(40px);
+
+transition:
+
+all .8s ease;
+
+}
+
+
+/* =========================================
+        IMAGE HOVER
+========================================= */
+
+.image-hover{
+
+overflow:hidden;
+
+border-radius:30px;
+
+}
+
+.image-hover img{
+
+transition:
+
+all .6s ease;
+
+}
+
+.image-hover:hover img{
+
+transform:
+
+scale(1.05);
+
+}
+
+
+/* =========================================
+        PREMIUM SECTION
+========================================= */
+
+.section-wrapper{
+
+width:100%;
+
+max-width:1300px;
+
+margin:auto;
+
+padding-inline:28px;
+
+}
+
+
+/* =========================================
+        FLEX CENTER
+========================================= */
+
+.flex-center{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+/* =========================================
+        PREMIUM SPACING
+========================================= */
+
+.section-space{
+
+padding-top:140px;
+
+padding-bottom:140px;
+
+}
+
+
+/* =========================================
+        ELEGANT TITLE
+========================================= */
+
+.elegant-title{
+
+font-size:
+
+clamp(2.8rem,6vw,5rem);
+
+font-weight:700;
+
+line-height:1.05;
+
+letter-spacing:-2px;
+
+}
+
+
+/* =========================================
+        ELEGANT TEXT
+========================================= */
+
+.elegant-text{
+
+max-width:720px;
+
+line-height:2;
+
+font-size:1.05rem;
+
+color:var(--text);
+
+}
+
+
+/* =========================================
+        HERO BADGE
+========================================= */
+
+.hero-badge{
+
+padding:
+
+10px 18px;
+
+border-radius:999px;
+
+background:
+
+rgba(255,255,255,.65);
+
+backdrop-filter:
+
+blur(12px);
+
+border:
+
+1px solid rgba(255,255,255,.5);
+
+box-shadow:
+
+0 10px 25px rgba(0,0,0,.06);
+
+}
+
+
+/* =========================================
+        PREMIUM TRANSITION
+========================================= */
+
+*{
+
+transition:
+
+background .3s ease,
+
+color .3s ease,
+
+border .3s ease;
+
+}
+/* =========================================
+        BOTANICAL UTILITIES
+========================================= */
+
+.paper{
+
+position:relative;
+
+}
+
+.paper::before{
 
 content:"";
 
 position:absolute;
 
-right:40px;
-
-bottom:40px;
-
-width:100px;
-
-height:100px;
-
-border-right:2px solid rgba(185,140,101,.15);
-
-border-bottom:2px solid rgba(185,140,101,.15);
+inset:0;
 
 pointer-events:none;
 
+opacity:.025;
+
+background-image:
+
+linear-gradient(
+
+45deg,
+
+transparent 48%,
+
+rgba(0,0,0,.08) 50%,
+
+transparent 52%
+
+);
+
+background-size:380px;
+
 }
 
-.hover-card{
 
-transition:.4s;
+.gold-text{
+
+color:var(--gold);
 
 }
 
-.hover-card:hover{
 
-transform:translateY(-10px);
+.leaf-text{
+
+color:var(--leaf);
+
+}
+
+
+.border-premium{
+
+border:
+
+1px solid rgba(212,180,106,.22);
+
+}
+
+
+.radius-premium{
+
+border-radius:32px;
+
+}
+
+
+.shadow-premium{
 
 box-shadow:
 
-0 15px 40px rgba(0,0,0,.12);
+0 18px 50px rgba(0,0,0,.08);
 
 }
 
-h1,h2,h3{
 
-letter-spacing:-1px;
+/* =========================================
+        SECTION TITLE
+========================================= */
+
+.section-heading{
+
+text-align:center;
+
+max-width:760px;
+
+margin:auto;
+
+margin-bottom:60px;
+
+}
+
+
+.section-heading p{
+
+margin-top:20px;
+
+}
+
+
+/* =========================================
+        GRID HELPERS
+========================================= */
+
+.grid-2{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(2,1fr);
+
+gap:60px;
+
+}
+
+
+.grid-3{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(3,1fr);
+
+gap:30px;
+
+}
+
+
+.grid-4{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(4,1fr);
+
+gap:28px;
+
+}
+
+
+/* =========================================
+        ICON CARD
+========================================= */
+
+.icon-card{
+
+padding:28px;
+
+border-radius:28px;
+
+background:
+
+rgba(255,255,255,.58);
+
+border:
+
+1px solid rgba(212,180,106,.18);
+
+backdrop-filter:
+
+blur(12px);
+
+box-shadow:
+
+0 15px 35px rgba(0,0,0,.06);
+
+transition:.35s;
+
+}
+
+.icon-card:hover{
+
+transform:
+
+translateY(-8px);
+
+box-shadow:
+
+0 25px 50px rgba(0,0,0,.10);
+
+}
+
+
+/* =========================================
+        SOFT BORDER
+========================================= */
+
+.soft-border{
+
+border:
+
+1px solid rgba(212,180,106,.16);
+
+}
+
+
+/* =========================================
+        RESPONSIVE
+========================================= */
+
+@media(max-width:1200px){
+
+.grid-4{
+
+grid-template-columns:
+
+repeat(3,1fr);
+
+}
+
+}
+
+
+@media(max-width:992px){
+
+section{
+
+padding:100px 0;
+
+}
+
+.grid-2{
+
+grid-template-columns:1fr;
+
+}
+
+.grid-3{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.grid-4{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.section-title{
+
+font-size:42px;
+
+}
+
+.elegant-title{
+
+font-size:42px;
+
+}
+
+}
+
+
+@media(max-width:768px){
+
+section{
+
+padding:80px 0;
+
+}
+
+.grid-3{
+
+grid-template-columns:1fr;
+
+}
+
+.grid-4{
+
+grid-template-columns:1fr;
+
+}
+
+.section-title{
+
+font-size:34px;
+
+}
+
+.elegant-title{
+
+font-size:34px;
+
+}
+
+.gold-divider{
+
+width:90px;
+
+}
+
+.botanical-divider{
+
+width:150px;
+
+}
+
+}
+
+
+@media(max-width:576px){
+
+body{
+
+font-size:15px;
+
+}
+
+section{
+
+padding:70px 0;
+
+}
+
+.section-title{
+
+font-size:30px;
+
+}
+
+.elegant-title{
+
+font-size:30px;
+
+}
+
+.btn-primary,
+
+.btn-outline{
+
+width:100%;
+
+justify-content:center;
+
+}
 
 }

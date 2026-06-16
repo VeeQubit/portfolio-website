@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
+import {
+  HiOutlineMenuAlt3,
+  HiOutlineX,
+} from "react-icons/hi";
+
 import Container from "./Container";
 
 const navItems = [
@@ -10,94 +14,265 @@ const navItems = [
   { name: "Projects", id: "projects" },
   { name: "Experience", id: "experience" },
   { name: "Education", id: "education" },
+  { name: "Certificates", id: "certificates" },
   { name: "Contact", id: "contact" },
 ];
 
 function Navbar() {
+
   const [open, setOpen] = useState(false);
+
   const [scroll, setScroll] = useState(false);
+
   const [active, setActive] = useState("home");
 
   useEffect(() => {
+
     const handleScroll = () => {
-      setScroll(window.scrollY > 30);
+
+      setScroll(window.scrollY > 20);
 
       navItems.forEach((item) => {
+
         const section = document.getElementById(item.id);
 
         if (!section) return;
 
         const top = section.offsetTop - 120;
+
         const bottom = top + section.offsetHeight;
 
-        if (window.scrollY >= top && window.scrollY < bottom) {
+        if (
+          window.scrollY >= top &&
+          window.scrollY < bottom
+        ) {
+
           setActive(item.id);
+
         }
+
       });
+
     };
 
     window.addEventListener("scroll", handleScroll);
 
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+
   }, []);
 
   return (
+
     <motion.nav
-      initial={{ y: -80 }}
+
+      initial={{ y: -100 }}
+
       animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+
+      transition={{ duration: .7 }}
+
+      className={`
+
+      fixed
+
+      top-5
+
+      left-1/2
+
+      -translate-x-1/2
+
+      w-[95%]
+
+      max-w-[1400px]
+
+      z-50
+
+      rounded-full
+
+      duration-500
+
+      ${
         scroll
-          ? "backdrop-blur-2xl bg-white/70 shadow-lg border-b border-white/20"
-          : "bg-transparent"
-      }`}
+          ? "glass shadow-2xl border border-white/40"
+          : "bg-white/40 backdrop-blur-xl border border-white/20"
+      }
+
+      `}
+
     >
+
+      <div className="corner-top"></div>
+
+      <div className="corner-bottom"></div>
+
       <Container>
 
-        <div className="h-[88px] flex items-center justify-between">
+        <div
+
+          className="
+
+          h-[78px]
+
+          px-5
+
+          flex
+
+          items-center
+
+          justify-between
+
+          "
+
+        >
 
           <motion.a
+
             href="#home"
-            whileHover={{ scale: 1.05 }}
+
+            whileHover={{
+              scale: 1.03,
+            }}
+
             className="flex flex-col"
+
           >
-            <span className="text-3xl font-bold tracking-wide text-[var(--primary)]">
+
+            <span
+
+              className="
+
+              text-[30px]
+
+              font-bold
+
+              tracking-tight
+
+              text-[var(--primary)]
+
+              "
+
+            >
+
               Varnaja
+
             </span>
 
-            <span className="text-xs tracking-[4px] uppercase text-[var(--text)]">
+            <span
+
+              className="
+
+              text-[10px]
+
+              uppercase
+
+              tracking-[5px]
+
+              text-[var(--secondary)]
+
+              "
+
+            >
+
               Software Engineer
+
             </span>
+
           </motion.a>
 
-          <ul className="hidden lg:flex items-center gap-10">
+          {/* Desktop Menu */}
+
+          <ul
+
+            className="
+
+            hidden
+
+            lg:flex
+
+            items-center
+
+            gap-8
+
+            "
+
+          >
 
             {navItems.map((item) => (
 
               <li key={item.id}>
 
                 <a
+
                   href={`#${item.id}`}
-                  className={`relative pb-2 transition-all duration-300 font-medium
+
+                  className={`
+
+                  link-premium
+
+                  relative
+
+                  pb-2
+
+                  duration-300
+
+                  font-medium
 
                   ${
+
                     active === item.id
+
                       ? "text-[var(--primary)]"
+
                       : "text-[var(--heading)]"
+
                   }
 
                   hover:text-[var(--primary)]
+
                   `}
+
                 >
+
                   {item.name}
 
                   {active === item.id && (
+
                     <motion.div
-                      layoutId="line"
-                      className="absolute left-0 bottom-0 h-[3px] rounded-full w-full bg-gradient-to-r from-yellow-400 to-orange-400"
+
+                      layoutId="nav"
+
+                      className="
+
+                      absolute
+
+                      left-0
+
+                      bottom-0
+
+                      h-[2px]
+
+                      w-full
+
+                      rounded-full
+
+                      bg-gradient-to-r
+
+                      from-[var(--gold)]
+
+                      via-[var(--accent)]
+
+                      to-[var(--gold)]
+
+                      "
+
                     />
+
                   )}
 
                 </a>
@@ -109,104 +284,202 @@ function Navbar() {
           </ul>
 
           <motion.a
+
             whileHover={{
-              y: -2,
-              scale: 1.05,
+
+              y:-2,
+
+              scale:1.03
+
             }}
+
             whileTap={{
-              scale: .95,
+
+              scale:.95
+
             }}
+
             href="#contact"
+
             className="
+
             hidden
+
             lg:flex
+
+            items-center
+
             px-7
+
             py-3
-            rounded-full
+
+            rounded-2xl
+
             bg-gradient-to-r
-            from-[#8A5C37]
-            to-[#B98C65]
+
+            from-[var(--primary)]
+
+            to-[var(--secondary)]
+
             text-white
-            shadow-xl
+
+            shadow-2xl
+
             "
+
           >
+
             Contact Me
+
           </motion.a>
 
           <button
+
             onClick={() => setOpen(!open)}
-            className="lg:hidden text-3xl text-[var(--primary)]"
+
+            className="
+
+            lg:hidden
+
+            text-3xl
+
+            text-[var(--primary)]
+
+            "
+
           >
-            {open ? <HiOutlineX /> : <HiOutlineMenuAlt3 />}
+
+            {open
+              ? <HiOutlineX/>
+              : <HiOutlineMenuAlt3/>}
+
           </button>
 
         </div>
 
       </Container>
-
-      <AnimatePresence>
+            <AnimatePresence>
 
         {open && (
 
           <motion.div
+
             initial={{
               opacity: 0,
               y: -30,
             }}
+
             animate={{
               opacity: 1,
               y: 0,
             }}
+
             exit={{
               opacity: 0,
               y: -30,
             }}
+
             transition={{
-              duration: .3,
+              duration: .35,
             }}
+
             className="
             lg:hidden
-            backdrop-blur-2xl
-            bg-white/90
+            glass
+            rounded-b-[30px]
             border-t
+            border-white/20
+            overflow-hidden
             "
+
           >
+
             <Container>
 
-              <div className="py-8 flex flex-col gap-6">
+              <div
+
+                className="
+                py-8
+                flex
+                flex-col
+                gap-6
+                "
+
+              >
 
                 {navItems.map((item) => (
 
-                  <a
+                  <motion.a
+
                     key={item.id}
+
+                    whileHover={{
+                      x: 6,
+                    }}
+
                     href={`#${item.id}`}
+
                     onClick={() => setOpen(false)}
-                    className="text-lg font-medium hover:text-[var(--primary)]"
+
+                    className={`
+                    text-lg
+                    font-medium
+                    duration-300
+
+                    ${
+                      active === item.id
+                        ? "text-[var(--primary)]"
+                        : "text-[var(--heading)]"
+                    }
+
+                    hover:text-[var(--primary)]
+                    `}
+
                   >
+
                     {item.name}
-                  </a>
+
+                  </motion.a>
 
                 ))}
 
-                <a
+                <motion.a
+
+                  whileHover={{
+                    scale: 1.03,
+                  }}
+
+                  whileTap={{
+                    scale: .95,
+                  }}
+
                   href="#contact"
+
                   onClick={() => setOpen(false)}
+
                   className="
+                  mt-4
                   w-fit
-                  mt-3
-                  px-6
+                  px-7
                   py-3
-                  rounded-full
-                  bg-[var(--primary)]
+                  rounded-2xl
+                  bg-gradient-to-r
+                  from-[var(--primary)]
+                  to-[var(--secondary)]
                   text-white
+                  shadow-xl
                   "
+
                 >
+
                   Contact Me
-                </a>
+
+                </motion.a>
 
               </div>
 
             </Container>
+
           </motion.div>
 
         )}
@@ -214,7 +487,9 @@ function Navbar() {
       </AnimatePresence>
 
     </motion.nav>
+
   );
+
 }
 
 export default Navbar;
